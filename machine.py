@@ -1,34 +1,34 @@
 class Machine:
     def __init__(self):
-        self.alphabet = ["^"]
-        self.states = {"q0": 0}
-        self.program = {}
+        self.__alphabet = ["^"]
+        self.__states = {"q0": 0}
+        self.__program = {}
 
     def set_alphabet(self, new_alpha):
-        self.alphabet += new_alpha
+        self.__alphabet += new_alpha
 
     def set_states(self, new_states):
         for i in range(len(new_states)):
-            self.states[new_states[i]] = i + 1
+            self.__states[new_states[i]] = i + 1
 
     def input_alphabet(self):
         new_alpha = input("Insert alphabet (blank is ^): ").split()
-        self.alphabet = ["@"] + new_alpha
+        self.__alphabet = ["@"] + new_alpha
 
     def input_states(self):
         new_states = input("Insert state's names (initial is q0): ").split()
         for i in range(len(new_states)):
-            self.states[new_states[i]] = i + 1
+            self.__states[new_states[i]] = i + 1
 
     def input_symbol(self):
         symbol = input("Insert symbol: ")
-        while not self.alphabet.__contains__(symbol) and symbol:
+        while not self.__alphabet.__contains__(symbol) and symbol:
             symbol = input("Error. Insert valid symbol: ")
         return symbol
 
     def input_state(self):
         state = input("Insert state: ")
-        while not self.states.__contains__(state) and state:
+        while not self.__states.__contains__(state) and state:
             state = input("Error. Insert valid state: ")
         return state
 
@@ -46,8 +46,8 @@ d   the direction that has to be taken after writing s (in {L, S, R}, where S wi
 q   the new state. 
 Leave one of the options blank to ignore the particular symbol/state combination.""")
 
-        for state in self.states:
-            for char in self.alphabet:
+        for state in self.__states:
+            for char in self.__alphabet:
                 print("Symbol: {0} --- State: {1}".format(char, state))
                 symbol_to_write = self.input_symbol()
                 if not symbol_to_write:
@@ -58,7 +58,7 @@ Leave one of the options blank to ignore the particular symbol/state combination
                 new_state = self.input_state()
                 if not new_state:
                     break
-                self.program[(char, state)] = (
+                self.__program[(char, state)] = (
                     symbol_to_write, direction, new_state)
 
     def input_tape_string(self):
@@ -66,7 +66,7 @@ Leave one of the options blank to ignore the particular symbol/state combination
         fault = False
 
         for char in tape:
-            if not self.alphabet.__contains__(char):
+            if not self.__alphabet.__contains__(char):
                 fault = True
 
         while fault:
@@ -74,7 +74,7 @@ Leave one of the options blank to ignore the particular symbol/state combination
                 "Error. Insert a valid input for the machine: ").split()
             fault = False
             for char in tape:
-                if not self.alphabet.__contains__(char):
+                if not self.__alphabet.__contains__(char):
                     fault = True
 
         return tape

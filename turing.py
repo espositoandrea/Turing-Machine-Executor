@@ -7,8 +7,6 @@ turing_machine.input_alphabet()
 turing_machine.input_states()
 turing_machine.input_program()
 
-print(turing_machine.program)
-
 input_tape = turing_machine.input_tape_string()
 print(input_tape)
 
