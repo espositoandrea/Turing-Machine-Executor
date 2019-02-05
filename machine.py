@@ -1,68 +1,62 @@
 class Machine:
     def __init__(self):
         self.__alphabet = ["^"]
-        self.__states = {"q0": 0}
+        self.__states = {"q0": "q0"}
         self.__program = {}
-
-    def set_alphabet(self, new_alpha):
-        self.__alphabet += new_alpha
-
-    def set_states(self, new_states):
-        for i in range(len(new_states)):
-            self.__states[new_states[i]] = i + 1
 
     def input_alphabet(self):
         new_alpha = input("Insert alphabet (blank is ^): ").split()
-        self.__alphabet = ["@"] + new_alpha
+        self.__alphabet += new_alpha
 
     def input_states(self):
         new_states = input("Insert state's names (initial is q0): ").split()
         for i in range(len(new_states)):
-            self.__states[new_states[i]] = i + 1
+            self.__states[new_states[i]] = new_states[i]
 
-    def input_symbol(self):
-        symbol = input("Insert symbol: ")
-        while not self.__alphabet.__contains__(symbol) and symbol:
-            symbol = input("Error. Insert valid symbol: ")
-        return symbol
+    def __check_symbol(self, to_check):
+        return to_check and self.__alphabet.__contains__(to_check)
 
-    def input_state(self):
-        state = input("Insert state: ")
-        while not self.__states.__contains__(state) and state:
-            state = input("Error. Insert valid state: ")
-        return state
+    def __check_state(self, to_check):
+        return to_check and self.__states.__contains__(to_check)
 
-    def input_direction(self):
-        direction = input("Insert direction (L, S or R): ").upper()
-        while not ["L", "S", "R"].__contains__(direction) and direction:
-            direction = input(
-                "Error. Insert valid direction (L, S or R): ").upper()
-        return direction
+    def __check_direction(self, to_check):
+        return to_check and ["L", "S", "R"].__contains__(to_check.upper())
 
     def input_program(self):
-        print("""Insert the operations in the form of (s, d, q): 
+        print("""Insert the operations in the form of s d q (in this order, separated by spaces): 
 s   the symbol that will be written 
 d   the direction that has to be taken after writing s (in {L, S, R}, where S will stop the execution) 
 q   the new state. 
-Leave one of the options blank to ignore the particular symbol/state combination.""")
+Leave the line blank to ignore that particular symbol/state combination.""")
 
         for state in self.__states:
             for char in self.__alphabet:
                 print("Symbol: {0} --- State: {1}".format(char, state))
-                symbol_to_write = self.input_symbol()
-                if not symbol_to_write:
-                    break
-                direction = self.input_direction()
-                if not direction:
-                    break
-                new_state = self.input_state()
-                if not new_state:
-                    break
-                self.__program[(char, state)] = (
-                    symbol_to_write, direction, new_state)
+                triplet = self.__input_triplet()
+                if triplet is not None:
+                    self.__program[(char, self.__states[state])] = triplet
+
+    def __input_triplet(self):
+        line = input()
+        triplet = None
+        if line:
+            splitted = (line.split()+ [None]*3)[:3]
+            has_to_end_while = self.__check_symbol(splitted[0]) and self.__check_direction(splitted[1]) and self.__check_state(splitted[2])
+            triplet = (splitted[0], splitted[1].upper(), self.__states[splitted[2]]) if has_to_end_while else None
+            while not has_to_end_while:
+                line = input()
+                if line:
+                    splitted = (line.split()+ [None]*3)[:3]
+                    has_to_end_while = self.__check_symbol(splitted[0]) and self.__check_direction(splitted[1]) and self.__check_state(splitted[2])
+                    triplet = (splitted[0], splitted[1].upper(), self.__states[splitted[2]]) if has_to_end_while else None
+                else:
+                    has_to_end_while = True
+                    triplet = None
+
+        return triplet
 
     def input_tape_string(self):
-        tape = input("Insert an input for the machine: ").split()
+        tape = list(input("Insert an input for the machine: "))
         fault = False
 
         for char in tape:
@@ -78,3 +72,12 @@ Leave one of the options blank to ignore the particular symbol/state combination
                     fault = True
 
         return tape
+
+    def get_program(self):
+        return self.__program
+
+    def get_first_state(self):
+        return self.__states["q0"]
+
+    def get_blank(self):
+        return self.__alphabet[0]
