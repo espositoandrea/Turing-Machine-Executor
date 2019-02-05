@@ -1,6 +1,6 @@
 class Machine:
     def __init__(self):
-        self.alphabet = ["@"]
+        self.alphabet = ["^"]
         self.states = {"q0": 0}
         self.program = {}
 
@@ -12,7 +12,7 @@ class Machine:
             self.states[new_states[i]] = i + 1
 
     def input_alphabet(self):
-        new_alpha = input("Insert alphabet (blank is @): ").split()
+        new_alpha = input("Insert alphabet (blank is ^): ").split()
         self.alphabet = ["@"] + new_alpha
 
     def input_states(self):
