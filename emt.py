@@ -1,10 +1,16 @@
 import argparse
+from colorama import Fore, Style, init
+from pyfiglet import figlet_format
 from machine import Machine
 from executor import Executor
+
+init()
 
 parser = argparse.ArgumentParser(description="Execute and test a Turing machine")
 parser.add_argument("-s", "--show-all-steps", dest="show_all_steps", action="store_true", help="Show all the steps the machine does to end its loop.")
 args = parser.parse_args()
+
+print(Fore.RED + figlet_format("EMT", font="epic") + Style.RESET_ALL)
 
 turing_machine = Machine()
 
