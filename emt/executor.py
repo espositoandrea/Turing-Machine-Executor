@@ -13,7 +13,7 @@ class Executor:
         i = 0
         direction = "R"
         if step_by_step:
-            self.print_tape(self.__output, i, str(current_state) + ":")
+            self.print_tape(self.__output, i, str(current_state) + ":", True)
         while direction != "S":
             read = self.__output[i]
             direction = program[(read, current_state)][1]
@@ -24,20 +24,21 @@ class Executor:
                 self.__output += ([self.__machine.get_blank()]
                                   * (i - len(self.__output) + 1))
             if step_by_step:
-                self.print_tape(self.__output, i, str(current_state) + ":")
+                self.print_tape(self.__output, i, str(
+                    current_state) + ":", True)
 
     def get_output(self):
         return self.__output
 
-    def print_tape(self, tape, index=-1, beginning_string=""):
+    def print_tape(self, tape, index=-1, beginning_string="", print_all_blanks=False):
         if beginning_string:
             print(beginning_string, end=" ")
         printed_something = False
         for char in tape:
-            if char != self.__machine.get_blank() or printed_something:
+            if char != self.__machine.get_blank() or print_all_blanks or printed_something:
                 print(char, end="")
         print()
         if index != -1:
-            print(" "*(index+1), end="")
-            print(" "*len(beginning_string), end="")
+            print(" " * len(beginning_string), end="")
+            print(" " * (index + 1), end="")
             print("^")
