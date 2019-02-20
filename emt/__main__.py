@@ -7,13 +7,26 @@ from textwrap import fill, dedent
 
 
 def input_alphabet(turing_machine):
-    new_alpha = input("Insert alphabet (blank is ^): ").split()
+    new_alpha = input("Insert alphabet (first is blank): ").split()
     turing_machine.set_alphabet(new_alpha)
 
 
 def input_states(turing_machine):
-    new_states = input("Insert state's names (initial is q0): ").split()
+    def input_halting_states(error=False):
+        if error:
+            print("Error", end=" ")
+        halting_states = input("Insert halt states' list: ").split()
+        errors = []
+        for state in halting_states:
+            if not turing_machine.is_state(state):
+                errors += [state]
+        return (halting_states, errors)
+    new_states = input("Insert state's names (first is initial): ").split()
     turing_machine.set_states(new_states)
+    halting = input_halting_states(False)
+    while halting[1]:
+        halting = input_halting_states(True)
+    turing_machine.set_halting_states(halting[0])
 
 
 def input_program(turing_machine):
@@ -24,16 +37,16 @@ def input_program(turing_machine):
             splitted = (line.split() + [None]*3)[:3]
             has_to_end_while = turing_machine.is_symbol(splitted[0]) and turing_machine.is_direction(
                 splitted[1]) and turing_machine.is_state(splitted[2])
-            triplet = (splitted[0], splitted[1].upper(), turing_machine.get_states()[
-                       splitted[2]]) if has_to_end_while else None
+            triplet = (splitted[0], splitted[1].upper(),
+                       splitted[2]) if has_to_end_while else None
             while not has_to_end_while:
                 line = input("Error. Reinsert triplet: ")
                 if line:
                     splitted = (line.split() + [None]*3)[:3]
                     has_to_end_while = turing_machine.is_symbol(splitted[0]) and turing_machine.is_direction(
                         splitted[1]) and turing_machine.is_state(splitted[2])
-                    triplet = (splitted[0], splitted[1].upper(), turing_machine.get_states()[
-                               splitted[2]]) if has_to_end_while else None
+                    triplet = (splitted[0], splitted[1].upper(
+                    ), splitted[2]) if has_to_end_while else None
                 else:
                     has_to_end_while = True
                     triplet = None
@@ -53,7 +66,7 @@ def input_program(turing_machine):
         for char in turing_machine.get_alphabet():
             print(f"Symbol: {char} --- State: {state}")
             triplet = input_triplet()
-            program[(char, turing_machine.get_states()[state])] = triplet
+            program[(char, state)] = triplet
     turing_machine.set_program(program)
 
 

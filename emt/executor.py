@@ -14,7 +14,7 @@ class Executor:
         direction = "R"
         if step_by_step:
             self.print_tape(self.__output, i, str(current_state) + ":", True)
-        while direction != "S":
+        while not self.__machine.is_halt(current_state):
             read = self.__output[i]
             direction = program[(read, current_state)][1]
             self.__output[i] = program[(read, current_state)][0]
