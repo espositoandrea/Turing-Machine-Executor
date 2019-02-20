@@ -1,8 +1,8 @@
 import argparse
 from colorama import Fore, Style, init
 from pyfiglet import figlet_format
-from machine import Machine
-from executor import Executor
+from .machine import Machine
+from .executor import Executor
 from textwrap import fill, dedent
 
 
@@ -87,8 +87,7 @@ def input_tape_string(turing_machine):
 
     return tape
 
-
-if __name__ == "__main__":
+def run():
     init()
 
     parser = argparse.ArgumentParser(
@@ -106,10 +105,10 @@ if __name__ == "__main__":
             Fore.RED + figlet_format(f"EMT v.{version}", font="epic") + Style.RESET_ALL)
         print(f"EMT - The Turing Machine Executor, version {version}")
         print("\nEMT  Copyright (C) 2019  Andrea Esposito\n" +
-              fill("This program comes with ABSOLUTELY NO WARRANTY. "
-                   "This is free software, and you are welcome to redistribute "
-                   "it under certain conditions. "
-                   "Visit the LICENSE file for more information."))
+            fill("This program comes with ABSOLUTELY NO WARRANTY. "
+                "This is free software, and you are welcome to redistribute "
+                "it under certain conditions. "
+                "Visit the LICENSE file for more information."))
         exit()
 
     print(Fore.RED + figlet_format("EMT", font="epic") + Style.RESET_ALL)
@@ -122,10 +121,13 @@ if __name__ == "__main__":
 
     input_tape = input_tape_string(turing_machine)
 
-    executor = Executor(turing_machine, input_tape)
+    machine_executor = Executor(turing_machine, input_tape)
     print("Begun:", end=" ")
-    executor.print_tape(input_tape)
-    executor.exec(step_by_step=args.show_all_steps)
+    machine_executor.print_tape(input_tape)
+    machine_executor.exec(step_by_step=args.show_all_steps)
 
     print("Ended:", end=" ")
-    executor.print_tape(executor.get_output())
+    machine_executor.print_tape(machine_executor.get_output())
+
+if __name__ == "__main__":
+    run()
