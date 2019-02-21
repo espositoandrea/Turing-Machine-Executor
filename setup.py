@@ -9,7 +9,7 @@ setup(
     name="turing_machine_executor",
     version=version,
     description="A Turing Machine executor",
-    license="GPLv3+",
+    license="MIT",
     long_description=long_description,
     author='Andrea Esposito',
     author_email='andrea.esposito099@gmail.com',
