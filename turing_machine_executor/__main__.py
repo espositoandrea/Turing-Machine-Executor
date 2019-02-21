@@ -99,11 +99,9 @@ def run():
     args = parser.parse_args()
 
     if args.version:
-        import pkg_resources
-        version = pkg_resources.require("emt")[0].version
         print(
-            Fore.RED + figlet_format(f"EMT v.{version}", font="epic") + Style.RESET_ALL)
-        print(f"EMT - The Turing Machine Executor, version {version}")
+            Fore.RED + figlet_format(f"EMT v.{__version__}", font="epic") + Style.RESET_ALL)
+        print(f"EMT - The Turing Machine Executor, version {__version__}")
         print("\nEMT  Copyright (C) 2019  Andrea Esposito\n" +
             fill("This program comes with ABSOLUTELY NO WARRANTY. "
                 "This is free software, and you are welcome to redistribute "
