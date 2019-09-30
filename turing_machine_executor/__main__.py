@@ -20,7 +20,8 @@ def input_states(turing_machine):
         for state in halting_states:
             if not turing_machine.is_state(state):
                 errors += [state]
-        return (halting_states, errors)
+        return halting_states, errors
+
     new_states = input("Insert state's names (first is initial): ").split()
     turing_machine.set_states(new_states)
     halting = input_halting_states(False)
@@ -34,24 +35,22 @@ def input_program(turing_machine):
         line = input("Insert triplet: ")
         triplet = None
         if line:
-            splitted = (line.split() + [None]*3)[:3]
+            splitted = (line.split() + [None] * 3)[:3]
             has_to_end_while = turing_machine.is_symbol(splitted[0]) and turing_machine.is_direction(
                 splitted[1]) and turing_machine.is_state(splitted[2])
-            triplet = (splitted[0], splitted[1].upper(),
-                       splitted[2]) if has_to_end_while else None
+            triplet = (splitted[0], splitted[1].upper(), splitted[2]) if has_to_end_while else None
             while not has_to_end_while:
                 line = input("Error. Reinsert triplet: ")
                 if line:
-                    splitted = (line.split() + [None]*3)[:3]
+                    splitted = (line.split() + [None] * 3)[:3]
                     has_to_end_while = turing_machine.is_symbol(splitted[0]) and turing_machine.is_direction(
                         splitted[1]) and turing_machine.is_state(splitted[2])
-                    triplet = (splitted[0], splitted[1].upper(
-                    ), splitted[2]) if has_to_end_while else None
+                    triplet = (splitted[0], splitted[1].upper(), splitted[2]) if has_to_end_while else None
                 else:
                     has_to_end_while = True
                     triplet = None
         else:
-            print("Line is empty. Combination skypped.")
+            print("Line is empty. Combination skipped.")
 
         return triplet
 
@@ -87,6 +86,7 @@ def input_tape_string(turing_machine):
 
     return tape
 
+
 def run():
     init()
 
@@ -103,10 +103,10 @@ def run():
             Fore.RED + figlet_format(f"EMT v.{__version__}", font="epic") + Style.RESET_ALL)
         print(f"EMT - The Turing Machine Executor, version {__version__}")
         print("\nEMT  Copyright (C) 2019  Andrea Esposito\n" +
-            fill("This program comes with ABSOLUTELY NO WARRANTY. "
-                "This is free software, and you are welcome to redistribute "
-                "it under certain conditions. "
-                "Visit the LICENSE file for more information."))
+              fill("This program comes with ABSOLUTELY NO WARRANTY. "
+                   "This is free software, and you are welcome to redistribute "
+                   "it under certain conditions. "
+                   "Visit the LICENSE file for more information."))
         exit()
 
     print(Fore.RED + figlet_format("EMT", font="epic") + Style.RESET_ALL)
@@ -126,6 +126,7 @@ def run():
 
     print("Ended:", end=" ")
     machine_executor.print_tape(machine_executor.get_output())
+
 
 if __name__ == "__main__":
     run()

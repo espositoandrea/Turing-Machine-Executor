@@ -23,7 +23,8 @@ class Machine:
     def is_state(self, to_check):
         return to_check and self.__states.__contains__(to_check)
 
-    def is_direction(self, to_check):
+    @staticmethod
+    def is_direction(to_check):
         return to_check and ["L", "R"].__contains__(to_check.upper())
 
     def is_halt(self, state):
@@ -39,8 +40,10 @@ class Machine:
 
     def get_first_state(self):
         return self.__initial_state
+
     def get_states(self):
         return self.__states
+
     def get_alphabet(self):
         return self.__alphabet
 
