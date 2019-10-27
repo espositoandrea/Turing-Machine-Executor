@@ -1,7 +1,7 @@
 # A Turing Machine Executor (EMT)<!-- omit in toc -->
 
-![License (MIT)](https://img.shields.io/github/license/espositoandrea/Turing-Machine-Executor.svg?style=for-the-badge)
-![Latest release](https://img.shields.io/github/release-pre/espositoandrea/Turing-Machine-Executor.svg?colorB=green&style=for-the-badge)
+[![License (MIT)](https://img.shields.io/github/license/espositoandrea/Turing-Machine-Executor.svg?style=for-the-badge)](https://github.com/espositoandrea/Turing-Machine-Executor/blob/v1.1.0-alpha/LICENSE)
+[![Latest release](https://img.shields.io/github/release-pre/espositoandrea/Turing-Machine-Executor.svg?style=for-the-badge)](https://github.com/espositoandrea/Turing-Machine-Executor/releases/latest)
 
 A simple executor of _(almost)_ every Turing machine.
 
