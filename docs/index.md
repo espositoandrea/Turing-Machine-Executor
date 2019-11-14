@@ -1,3 +1,8 @@
+---
+title: EMT - Turing Machine Executor
+description: A simple executor of (almost) every Turing machine.
+show_downloads: true
+---
 # EMT - Turing Machine Executor<!-- omit in toc -->
 
 Welcome to the EMT documentation!
@@ -65,10 +70,14 @@ python --version
 
 #### Downloading and Starting
 
+You can install EMT using [PyPI](https://pypi.org/project/turing-machine-executor/) by running the `pip` command (skip to step 2) or from the source code (start from step 1).
+
 1. Download the [latest release](http://github.com/espositoandrea/Turing-Machine-Executor/releases/latest) and unzip it.
 2. Open your favorite console in the folder that contains the unzipped files and run
 
     ```shell
+    pip install turing-machine-executor
+    # OR
     python setup.py install
     ```
 
