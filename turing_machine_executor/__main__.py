@@ -7,12 +7,27 @@ from textwrap import fill, dedent
 
 
 def input_alphabet(turing_machine):
+    """
+    Get an alphabet from the user and register it in a Turing's machine.
+    :param turing_machine: The Turing's machine.
+    :return:
+    """
     new_alpha = input("Insert alphabet (first is blank): ").split()
     turing_machine.set_alphabet(new_alpha)
 
 
 def input_states(turing_machine):
+    """
+    Get the Turing's machine stated from the user.
+    :param turing_machine: The Turing's machine.
+    :return:
+    """
     def input_halting_states(error=False):
+        """
+        Get the halt states' from the user.
+        :param error: Whether or not there was an error.
+        :return:
+        """
         if error:
             print("Error", end=" ")
         halting_states = input("Insert halt states' list: ").split()
@@ -70,6 +85,11 @@ def input_program(turing_machine):
 
 
 def input_tape_string(turing_machine):
+    """
+    Get the input tape's string from the user.
+    :param turing_machine: The Turing's machine. Used to check if the inserted tape is valid.
+    :return: The given tape.
+    """
     tape = list(input("Insert an input for the machine: "))
     fault = False
 
@@ -88,6 +108,10 @@ def input_tape_string(turing_machine):
 
 
 def run():
+    """
+    Run EMT.
+    :return:
+    """
     init()
 
     parser = argparse.ArgumentParser(

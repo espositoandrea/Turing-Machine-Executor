@@ -9,12 +9,13 @@ Welcome to the EMT documentation!
 
 Here you can get more information on the app and on its source code.
 
-This documentation can be subdivided in two parts:
+This documentation can be subdivided in three parts:
 
 1. Preliminary definitions on which this software is based
-2. Code documentation / User manual
+2. User manual
+3. [Code documentation](./code/index.md)
 
-The two parts are then splitted in various files. They are accessible through the sidebar or using the following menu.
+Navigate the first two sections using the following ToC.
 
 - [Preliminary Definitions](#preliminary-definitions)
   - [The Turing Machine](#the-turing-machine)

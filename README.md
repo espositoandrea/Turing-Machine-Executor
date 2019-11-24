@@ -22,6 +22,14 @@ To be completely honest I was just really bored and I needed a way to spend my t
 
 Visit the [Wiki page](https://github.com/espositoandrea/Turing-Machine-Executor/wiki/How-To-Use-EMT) to know how to use EMT.
 
+## The Makefile
+
+The Makefile (and the file `make.bat`) in this repository is used to build the Sphinx documentation. Refer to the [official Sphinx documentation](https://www.sphinx-doc.org/en/1.8/man/sphinx-build.html?highlight=makefile#makefile-options) for more information on it. Note that, in order to build the documentation for GitHub Pages, the extension [`sphinx-markdown-builder`](https://pypi.org/project/sphinx-markdown-builder/) is needed. You can then build the GitHub Pages documentation using the following command:
+
+```bash
+make github
+```
+
 ## Known Bugs and Limitations
 
 In this section there's a list of known bugs and limitations of EMT. For future reference, if a bug is solved (or if a limitation is removed) it won't be deleted from this list, but it will be just marked as "deleted" (like ~~this~~).
